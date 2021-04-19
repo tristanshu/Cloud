@@ -52,7 +52,25 @@ class cntrCloud {
 		  		  
 		  $this->model->loginEmployee ($_REQUEST['username'], $_REQUEST['password']);		  
 		}
+
+		if($flag == "forgotPassword"){
+			include "View/forgotUserPasswordView.html";
+
+			if( !empty($_REQUEST['password']) && !empty($_REQUEST['confirm_password'])  && !empty($_REQUEST['email'])){
+				$this->model->updatePassword($_REQUEST['password'], $_REQUEST['confirm_password'], $_REQUEST['email'],"USER");	
+			}
 		
+		}
+		
+		if($flag == "forgotEmployeePassword"){
+			include "View/forgotEmployeePasswordView.html";
+
+			if(!empty($_REQUEST['password']) && !empty($_REQUEST['confirm_password'] ) && !empty($_REQUEST['username'])){
+				
+					$this->model->updatePassword($_REQUEST['password'], $_REQUEST['confirm_password'], $_REQUEST['username'],"EMPLOYEE");	
+				}
+		}
+
 	}
 }	
 ?>

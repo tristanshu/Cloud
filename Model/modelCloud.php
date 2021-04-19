@@ -82,6 +82,38 @@ Class modelCloud {
 			}
 
 		}
+
+		function updatePassword($password, $confirm_password, $name,$flag){
+		
+			if($password == $confirm_password && $flag=="USER"){
+				
+				$query = "UPDATE user SET password = '$password' WHERE email = '$name'";
+				$this->updatePasswordFromDB($query);
+			}elseif($password == $confirm_password && $flag=="EMPLOYEE"){
+
+				$query = "UPDATE employee SET password = '$password' WHERE username = '$name'";
+				$this->updatePasswordFromDB($query);
+
+			}else{
+				echo "Passwords do not match";
+			}
+
+		}
+
+		// implement forgot password for user either user or Employee
+		public function updatePasswordFromDB($query)
+		{
+
+			if ($this->conn->query($query) === TRUE) {
+				echo "<br>Password Successfully updated";
+				} else {
+				echo "<br>Error: could not update password";
+				}
+		
+				$this->conn->close(); // close DB connection		
+				
+		}
+
 	}
 	
 
